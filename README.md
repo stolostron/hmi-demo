@@ -46,6 +46,6 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
 
 The password you want is the one in the stringData password field that looks like this:
 
-```shell
-"stringData":{"password":"YvtpSvEXbs3ptwPawIOsnRRUl7Lw7IeN"}
-```
+    ```shell
+    "stringData":{"password":"YvtpSvEXbs3ptwPawIOsnRRUl7Lw7IeN"}
+    ```
