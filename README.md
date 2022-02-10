@@ -6,8 +6,9 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
 
 ## Steps to install
 
-1. Install Ansible Automation platform using the operator
+1. Install OpenShift Gitops so we can use it to deploy AAP
 
 ```shell
-oc apply -k https://github.com/redhat-cop/gitops-catalog/ansible-automation-platform/instance/overlays/default -n ansible-automation-platform && oc apply -k https://github.com/redhat-cop/gitops-catalog/tree/main/ansible-automation-platform/instance/overlays/default
+oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/stable
 ```
+
