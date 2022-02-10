@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     directory:
-      recurse: true
+      recurse: false
     path: ansible-automation-platform/operator/overlays/stable-2.1/
     repoURL: https://github.com/redhat-cop/gitops-catalog
     targetRevision: main
