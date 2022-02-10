@@ -15,7 +15,7 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
 2. Create service account so we can install Ansible Automation Platform via Openshift Gitops.
 
     ```shell
-    oc create -f argo/service_account.yaml
+    oc create -f argo/argocd-clusterbindingrole.yaml
     ```
 
 3. Create Openshift Gitops application to install Ansible Automation Platform Operator.
