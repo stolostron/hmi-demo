@@ -18,4 +18,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-      serviceAccountName: ansible-automation-platform-controller-role-binding
