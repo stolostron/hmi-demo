@@ -49,3 +49,5 @@ The password you want is the one in the stringData password field that looks lik
     ```shell
     "stringData":{"password":"YvtpSvEXbs3ptwPawIOsnRRUl7Lw7IeN"}
     ```
+
+7. Once logged in you will be prompted for your console.redhat.com credentials to choose which subscription to use.
