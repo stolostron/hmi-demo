@@ -8,8 +8,8 @@
     auto_attach: true
 
 - name: install Gnome Desktop Environment
-  ansible.builtin.package:
-    name: "GNOME Desktop Environment"
+  ansible.builtin.yum:
+    name: "@GNOME Desktop Environment"
     state: latest
 
 - name: create systemd service for firefox
