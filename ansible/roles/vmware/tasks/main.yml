@@ -1,6 +1,6 @@
 ---
 - name: Create a virtual machine from a template
-  vmware_guest:
+  community.vmware.vmware_guest:
     hostname: "{{ esxi_hostname }}"
     datacenter: "{{ datacenter_name }}"
     validate_certs: no
