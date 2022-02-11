@@ -1,6 +1,0 @@
-# Vars for iptables
-iptables_packages:
-  - iptables-services
-iptables_services:
-  - iptables
-  - ip6tables

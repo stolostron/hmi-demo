@@ -1,4 +1,0 @@
-- name: set timezone info
-  timezone:
-    name: "{{ timezone | default(omit, true) }}"
-    hwclock: "{{ timezone_hwclock | default(omit, true) }}"

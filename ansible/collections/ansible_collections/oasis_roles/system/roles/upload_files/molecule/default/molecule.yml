@@ -1,8 +1,0 @@
-driver:
-  name: containers
-platforms:
-  - name: upload_files_default
-    image: centos:7
-provisioner:
-  playbooks:
-    converge: playbook.yml

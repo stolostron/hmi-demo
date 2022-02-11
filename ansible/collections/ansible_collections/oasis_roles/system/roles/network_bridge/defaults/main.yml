@@ -1,3 +1,0 @@
-network_bridge_become: true
-network_bridge_become_user: root
-network_bridge_devices: {}

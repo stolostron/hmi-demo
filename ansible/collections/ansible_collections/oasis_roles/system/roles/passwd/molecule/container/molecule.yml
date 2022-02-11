@@ -1,5 +1,0 @@
-driver:
-  name: containers
-platforms:
-  - name: passwd_docker
-    image: centos:7

@@ -1,5 +1,0 @@
-- name: restart network
-  service:
-    name: network
-    state: restarted
-  when: network_scripts_restart | bool

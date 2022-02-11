@@ -8,4 +8,4 @@ collections:
   - name: fedora.linux_system_roles
     source: https://galaxy.ansible.com
   - name: redhat.rhel_idm
-    source: https://galaxy.ansible.com
+    source: https://cloud.redhat.com/api/automation-hub/

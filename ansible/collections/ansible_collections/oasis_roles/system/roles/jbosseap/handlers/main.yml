@@ -1,5 +1,0 @@
-- name: restart jbossas
-  become: true
-  service:
-    name: jbossas
-    state: restarted

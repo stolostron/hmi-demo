@@ -1,3 +1,0 @@
-{% for nfs_server_share in nfs_server_shares %}
-{{ nfs_server_share.share_path }} {{ nfs_server_share.host_allow }}({{ nfs_server_share.opts }})
-{% endfor %}

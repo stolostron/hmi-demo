@@ -1,3 +1,0 @@
-nmcli_connections_become: true
-nmcli_connections_become_user: root
-nmcli_connections: []

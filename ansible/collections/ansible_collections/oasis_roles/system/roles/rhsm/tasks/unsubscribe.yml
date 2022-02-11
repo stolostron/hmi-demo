@@ -1,3 +1,0 @@
-- name: Unregister system from RHSM provider
-  redhat_subscription:
-    state: absent

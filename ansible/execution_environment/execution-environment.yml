@@ -1,13 +1,21 @@
 ---
 version: 1
 
-ansible_config: '/etc/ansible/ansible.cfg'
+build_arg_defaults: 
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: "-v"
 
-dependencies:
+ansible_config: '/etc/ansible/ansible.cfg' 
+
+dependencies: 
   galaxy: requirements.yml
   python: requirements.txt
   system: bindep.txt
 
-additional_build_steps:
+additional_build_steps: 
   prepend: |
-    RUN pip3 install --upgrade pip setuptools
+    RUN whoami
+    RUN cat /etc/os-release
+  append:
+    - RUN echo This is a post-install command!
+    - RUN ls -la /etc
+    - RUN pip3 install --upgrade pip setuptools

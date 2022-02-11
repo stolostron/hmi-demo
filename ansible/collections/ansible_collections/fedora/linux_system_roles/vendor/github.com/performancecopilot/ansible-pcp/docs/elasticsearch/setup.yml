@@ -1,7 +1,0 @@
----
-- hosts: monitoring
-  roles:
-    - role: performancecopilot.metrics.elasticsearch
-      vars:
-        elasticsearch_agent: yes
-        elasticsearch_export_metrics: yes

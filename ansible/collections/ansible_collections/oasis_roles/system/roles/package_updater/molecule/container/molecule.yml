@@ -1,5 +1,0 @@
-driver:
-  name: containers
-platforms:
-  - name: package_updater_docker
-    image: centos:7

@@ -1,4 +1,0 @@
-# defaults file for cockpit
-cockpit_become_user: root
-cockpit_become: true
-cockpit_additional_packages: []

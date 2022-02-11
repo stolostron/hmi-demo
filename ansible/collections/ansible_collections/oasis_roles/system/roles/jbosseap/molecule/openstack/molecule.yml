@@ -1,5 +1,0 @@
-driver:
-  name: openstack
-platforms:
-  - name: jbosseap_openstack
-    flavor: ci.m1.small

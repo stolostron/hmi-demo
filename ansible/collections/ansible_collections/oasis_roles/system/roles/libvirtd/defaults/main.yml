@@ -1,2 +1,0 @@
-libvirtd_become: true
-libvirtd_become_user: root
