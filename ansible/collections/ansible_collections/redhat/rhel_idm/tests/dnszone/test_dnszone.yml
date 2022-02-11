@@ -1,0 +1,270 @@
+---
+- name: Test dnszone
+  hosts: "{{ ipa_test_host | default('ipaserver') }}"
+  become: true
+  gather_facts: true
+
+  tasks:
+
+  # Setup
+  - name: Setup testing environment
+    include_tasks: env_setup.yml
+
+  # Tests
+  - name: Check if zone is present, when in shouldn't be.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: present
+    check_mode: yes
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Check if zone is present again, when in shouldn't be.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: present
+    check_mode: yes
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure zone is present.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: present
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Check if zone is present, when in should be.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: present
+    check_mode: yes
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure zone is present, again.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: present
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure zone is disabled.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: disabled
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure zone is disabled, again.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: disabled
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure zone is enabled.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: enabled
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure zone is enabled, again.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      state: enabled
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure forward_policy is none.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forward_policy: none
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure forward_policy is none, again.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forward_policy: none
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure forward_policy is first.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forward_policy: first
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure forward_policy is first, again.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forward_policy: first
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure first forwarder is set.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forwarders:
+        - ip_address: 8.8.8.8
+          port: 53
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure first and second forwarder are set.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forwarders:
+        - ip_address: 8.8.8.8
+          port: 53
+        - ip_address: 2001:4860:4860::8888
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure first and second forwarder are set, again.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forwarders:
+        - ip_address: 8.8.8.8
+          port: 53
+        - ip_address: 2001:4860:4860::8888
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure only second forwarder is set.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forwarders:
+        - ip_address: 2001:4860:4860::8888
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Nothing changes.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure no forwarders are set.
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: testzone.local
+      forwarders: []
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Create zones test1
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: test1.testzone.local
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Create zones test1, again
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: test1.testzone.local
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Create zones test2
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: test2.testzone.local
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Create zones test2, again
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: test2.testzone.local
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Create zones test3
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: test3.testzone.local
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Create zones test3, again
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name: test3.testzone.local
+    register: result
+    failed_when: result.changed or result.failed
+
+  - name: Ensure multiple zones are absent
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name:
+        - test1.testzone.local
+        - test2.testzone.local
+        - test3.testzone.local
+      state: absent
+    register: result
+    failed_when: not result.changed or result.failed
+
+  - name: Ensure multiple zones are absent, again
+    redhat.rhel_idm.ipadnszone:
+      ipaadmin_password: SomeADMINpassword
+      ipaapi_context: "{{ ipa_context | default(omit) }}"
+      name:
+        - test1.testzone.local
+        - test2.testzone.local
+        - test3.testzone.local
+      state: absent
+    register: result
+    failed_when: result.changed or result.failed
+
+  # Teardown
+  - name: Teardown testing environment
+    include_tasks: env_teardown.yml

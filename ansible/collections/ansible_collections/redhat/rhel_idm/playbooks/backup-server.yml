@@ -1,0 +1,8 @@
+---
+- name: Playbook to backup IPA server
+  hosts: ipaserver
+  become: true
+
+  roles:
+  - role: redhat.rhel_idm.ipabackup
+    state: present

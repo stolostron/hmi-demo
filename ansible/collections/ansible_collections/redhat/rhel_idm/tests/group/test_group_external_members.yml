@@ -1,0 +1,113 @@
+---
+- name: find trust
+  hosts: ipaserver
+  become: true
+  gather_facts: false
+
+  tasks:
+
+  - include_tasks: ../env_freeipa_facts.yml
+
+  - block:
+
+    - name: Add nonposix group.
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        nonposix: yes
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Set group to be external
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        external: yes
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Add AD users to group
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        external_member: "AD\\Domain Users"
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Add AD users to group, again
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        external_member: "AD\\Domain Users"
+      register: result
+      failed_when: result.failed or result.changed
+
+    - name: Remove external group
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        state: absent
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Add nonposix, external group, with AD users.
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        nonposix: yes
+        external: yes
+        external_member: "AD\\Domain Users"
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Add nonposix, external group, with AD users, again.
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        nonposix: yes
+        external: yes
+        external_member: "AD\\Domain Users"
+      register: result
+      failed_when: result.failed or result.changed
+
+    - name: Remove group
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        state: absent
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Add nonposix group.
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        nonposix: yes
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Set group to be external, and add users.
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        external: yes
+        external_member: "AD\\Domain Users"
+      register: result
+      failed_when: result.failed or not result.changed
+
+    - name: Set group to be external, and add users, again.
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        external: yes
+        external_member: "AD\\Domain Users"
+      register: result
+      failed_when: result.failed or result.changed
+
+    - name: Cleanup environment.
+      redhat.rhel_idm.ipagroup:
+        ipaadmin_password: SomeADMINpassword
+        name: extgroup
+        state: absent
+
+    when: trust_test_is_supported | default(false)

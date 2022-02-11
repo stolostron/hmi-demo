@@ -1,0 +1,8 @@
+---
+- name: Playbook to unconfigure IPA clients
+  hosts: ipaclients
+  become: true
+
+  roles:
+  - role: redhat.rhel_idm.ipaclient
+    state: absent
