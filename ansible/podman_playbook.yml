@@ -15,6 +15,6 @@
         username: "{{ podman_username }}"
         password: "{{ podman_password }}"
         registry: quay.io
-    - name: import fedora.iot.container_lifecycle role
+    - name: import container_lifecycle role
       ansible.builtin.import_role:
-        name: fedora.iot.container_lifecycle
+        name: container_lifecycle
