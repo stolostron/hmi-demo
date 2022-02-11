@@ -23,7 +23,7 @@
 
     - name: Subscribe hosts
       ansible.builtin.import_role:
-        name: oasis_roles.system
+        name: oasis_roles.system.rhsm
 
     - name: Gather facts - again
       ansible.builtin.setup:
@@ -116,7 +116,7 @@
 
     - name: Subscribe hosts
       ansible.builtin.import_role:
-        name: oasis_roles.system
+        name: oasis_roles.system.rhsm
 
     - name: Gather facts - again
       ansible.builtin.setup:
