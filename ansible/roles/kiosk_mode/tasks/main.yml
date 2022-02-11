@@ -9,7 +9,7 @@
 
 - name: install Gnome Desktop Environment
   ansible.builtin.yum:
-    name: "@GNOME Desktop Environment"
+    name: "Server With GUI"
     state: latest
 
 - name: create systemd service for firefox
