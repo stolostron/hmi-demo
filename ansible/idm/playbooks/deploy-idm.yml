@@ -71,7 +71,7 @@
     - prereq
 
 - name: Install IdM server
-  hosts: ipaserver
+  hosts: all
   roles:
     - role: redhat.rhel_idm.ipaserver
       state: "{{ set_state | default('present') }}"
@@ -79,7 +79,7 @@
     - ipaserver
 
 - name: Add IdM DNS entries for replicas
-  hosts: ipaserver
+  hosts: all
   tasks:
     - name: Add IdM DNS entries for replicas
       redhat.rhel_idm.ipadnsrecord:
@@ -97,7 +97,7 @@
 ########################
 
 - name: Prerequisites
-  hosts: ipareplicas
+  hosts: all
   gather_facts: false
   tasks:
     - name: Set hostname
@@ -172,7 +172,7 @@
     - ipareplicas
 
 - name: Configure IdM users
-  hosts: ipaserver
+  hosts: all
   tasks:
     - name: Configure IdM users
       redhat.rhel_idm.ipauser: "{{ item | combine({'ipaadmin_password': ipaadmin_password}) }}"
