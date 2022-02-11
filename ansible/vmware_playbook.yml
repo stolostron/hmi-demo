@@ -1,5 +1,5 @@
 ---
-- name: Configure Fedora Workstation
+- name: Build VMware VM for HMI
   hosts: localhost
   gather_facts: False
   become: no
