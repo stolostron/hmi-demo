@@ -1,7 +1,20 @@
 ---
 - name: Configure Podman to run quay.io/cferman/ubi-ignition container on hmi device
   hosts: all
-  gather_facts: False
   become: yes
-  roles:
-    - podman_ignition
+  vars:
+    systemd_units_dir: "/etc/systemd/system/"
+    service_name: "redis"
+    container_state: "installed"
+    container_image: "quay.io/cferman/ubi-ignition"
+    container_tag: "latest"
+    container_port_mapping: "8080:8080"
+  tasks:
+    - name: Login to default registry and create ${XDG_RUNTIME_DIR}/containers/auth.json
+      containers.podman.podman_login:
+        username: "{{ podman_username }}"
+        password: "{{ podman_password }}"
+        registry: quay.io
+    - name: import fedora.iot.container_lifecycle role
+      ansible.builtin.import_role:
+        name: fedora.iot.container_lifecycle
