@@ -1,8 +1,11 @@
 ---
 # tasks file for kiosk_mode
-- name: oasis_roles.system.rhsm
-  ansible.builtin.import_role:
-    name: oasis_roles.system.rhsm
+- name: Register as user with password and auto-subscribe to available content.
+  community.general.redhat_subscription:
+    state: present
+    username: "{{ rhsm_username }}"
+    password: "{{ rhsm_password }}"
+    auto_attach: true
 
 - name: install firefox
   ansible.builtin.package:
