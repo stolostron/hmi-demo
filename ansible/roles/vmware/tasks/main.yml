@@ -1,7 +1,7 @@
 ---
 - name: Create a virtual machine from a template
   vmware_guest:
-    esxi_hostname: "{{ esxi_hostname }}"
+    hostname: "{{ esxi_hostname }}"
     datacenter: "{{ datacenter_name }}"
     validate_certs: no
     folder: "{{ vcsa_folder }}"
