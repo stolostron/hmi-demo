@@ -11,7 +11,7 @@
   ansible.builtin.package:
     name: 
     - firefox
-    - "@^gnome-desktop-environment"
+    - "GNOME Desktop Environment"
     state: latest
 
 - name: create systemd service for firefox
