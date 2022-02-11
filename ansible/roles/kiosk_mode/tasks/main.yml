@@ -28,6 +28,11 @@
   ansible.builtin.user:
     name: kiosk
     comment: kiosk user
+    state: present
+    create: yes
+    shell: /bin/bash
+    uid: 2000
+    group: users
 
 - name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
   ansible.builtin.template:
@@ -40,3 +45,10 @@
     src: /usr/lib/systemd/system/graphical.target
     dest: /etc/systemd/system/default.target
     state: link
+
+- name: allow firewall port 8088 for kiosk
+  ansible.builtin.firewall:
+    name: "kiosk"
+    port: 8088
+    proto: tcp
+    action: accept
