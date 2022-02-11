@@ -4,7 +4,7 @@
 ########################
 
 - name: Prerequisites
-  hosts: "{{ ansible_host }}"
+  hosts: all
   gather_facts: false
   tasks:
     - name: Set hostname
