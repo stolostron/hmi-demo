@@ -4,7 +4,7 @@
   become: yes
   vars:
     systemd_units_dir: "/etc/systemd/system/"
-    service_name: "redis"
+    service_name: "inductive-automation-ignition"
     container_state: "installed"
     container_image: "quay.io/cferman/ubi-ignition"
     container_tag: "latest"
