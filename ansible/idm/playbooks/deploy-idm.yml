@@ -4,7 +4,6 @@
 ########################
 
 - name: Prerequisites
-  hosts: ipaserver
   gather_facts: false
   tasks:
     - name: Set hostname
