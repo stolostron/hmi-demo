@@ -5,3 +5,7 @@
   become: yes
   roles:
     - kiosk_mode
+  vars:
+  # Fetch subscription-manager credentials
+    rhsm_username: "{{ rhsm_username }}"
+    rhsm_password: "{{ rhsm_password }}"
