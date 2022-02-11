@@ -12,8 +12,3 @@
     - size_gb: "{{ host_disk_size }}"
       type: "{{ host_disk_type }}"
       datastore: "{{ esxi_datastore }}"
-  vars:
-    vmware:
-      hostname: '{{ lookup("env", "VMWARE_HOST") }}'
-      username: '{{ lookup("env", "VMWARE_USER") }}'
-      password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
