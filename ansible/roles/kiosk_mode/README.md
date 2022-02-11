@@ -1,6 +1,6 @@
-# Podman Role
+# Kiosk Mode Role
 
-Configures podman to run ubi-igntion container
+Configures kiosk mode on rhel to run firefox on boot in full screen mode pointing to the ignition application running in podman.
 
 ## Requirements
 
