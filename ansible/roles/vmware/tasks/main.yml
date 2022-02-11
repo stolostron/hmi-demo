@@ -4,7 +4,7 @@
     hostname: "{{ vcsa_hostname }}"
     username: "{{ vcsa_username }}"
     esxi_hostname: "{{ esxi_hostname }}"
-    password: "{{ pwd }}"
+    password: "{{ vcsa_pwd }}"
     datacenter: "{{ datacenter_name }}"
     validate_certs: no
     folder: "{{ vcsa_folder }}"
