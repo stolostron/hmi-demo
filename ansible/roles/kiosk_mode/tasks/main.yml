@@ -7,13 +7,10 @@
     password: "{{ rhsm_password }}"
     auto_attach: true
 
-- name: install firefox
+- name: install Gnome Desktop Environment
   ansible.builtin.package:
-    name: "{{ item }}"
+    name: "GNOME Desktop Environment"
     state: latest
-  with_items:
-     - firefox
-     - "GNOME Desktop Environment"
 
 - name: create systemd service for firefox
   ansible.builtin.template:
