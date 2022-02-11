@@ -1,0 +1,7 @@
+---
+- name: Configure Podman to run quay.io/cferman/ubi-ignition container on hmi device
+  hosts: all
+  gather_facts: False
+  become: yes
+  roles:
+    - podman_ignition

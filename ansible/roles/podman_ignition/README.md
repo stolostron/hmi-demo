@@ -1,6 +1,6 @@
-# VMware Role
+# Podman Role 
 
-community.vmware role to create virtual machines on VMware to demo HMI devices
+Configures podman to run ubi-igntion container
 
 ## Requirements
 
