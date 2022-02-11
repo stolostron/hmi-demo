@@ -1,0 +1,5 @@
+- name: Run container
+  containers.podman.podman_container:
+    name: container
+    image: quay.io/cferman/ubi-ignition
+    state: started
