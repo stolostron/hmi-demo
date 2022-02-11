@@ -9,10 +9,11 @@
 
 - name: install firefox
   ansible.builtin.package:
-    name: 
-    - firefox
-    - "GNOME Desktop Environment"
+    name: "{{ item }}"
     state: latest
+  with_items:
+     - firefox
+     - "GNOME Desktop Environment"
 
 - name: create systemd service for firefox
   ansible.builtin.template:
