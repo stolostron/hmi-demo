@@ -2,7 +2,7 @@
 - name: Create a virtual machine from a template
   vmware_guest:
     hostname: "{{ vcsa_hostname }}"
-    username: "{{ vcsa_unsername }}"
+    username: "{{ vcsa_username }}"
     esxi_hostname: "{{ esxi_hostname }}"
     password: "{{ pwd }}"
     datacenter: "{{ datacenter_name }}"
