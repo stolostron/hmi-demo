@@ -9,6 +9,7 @@
     container_image: "quay.io/cferman/ubi-ignition"
     container_tag: "latest"
     container_port_mapping: "8080:8080"
+    container_extra_params: "--privileged -e GATEWAY_ADMIN_PASSWORD=redhat"
   tasks:
     - name: Login to default registry and create ${XDG_RUNTIME_DIR}/containers/auth.json
       containers.podman.podman_login:
