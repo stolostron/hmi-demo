@@ -2,7 +2,7 @@
 - name: Configure Fedora Workstation
   hosts: localhost
   gather_facts: False
-  become: yes
+  become: no
   roles:
     - vmware
 
