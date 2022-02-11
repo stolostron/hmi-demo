@@ -4,7 +4,7 @@
 ########################
 
 - name: Prerequisites
-  hosts: ipaserver_42299afb-7942-3934-6eb7-92f01e551994
+  hosts: "{{ ansible_host }}"
   gather_facts: false
   tasks:
     - name: Set hostname
