@@ -2,9 +2,9 @@
 Description=Firefox service
 
 [Service]
-User=demo
-Group=demo
-ExecStart=/usr/bin/firefox --kiosk https://localhost:8080
+User=kiosk
+Group=kiosk
+ExecStart=/usr/bin/firefox --kiosk https://localhost:8088
 
 [Install]
 WantedBy=multi-user.target
