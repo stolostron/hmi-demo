@@ -1,5 +1,22 @@
 ---
 # tasks file for kiosk_mode
+- name: oasis_roles.system.rhsm
+  ansible.builtin.import_role:
+    name: oasis_roles.system.rhsm
+
+- name: install firefox
+  ansible.builtin.package:
+    name: 
+    - firefox
+    - "@^gnome-desktop-environment"
+    state: latest
+
+- name: create systemd service for firefox
+  ansible.builtin.template:
+    src: firefox.service
+    dest: /etc/systemd/system/firefox.service
+    mode: 0644
+
 - name: Create gdm configuration for kiosk kiosk_mode
   ansible.builtin.template:
     src: custom.conf
@@ -17,17 +34,3 @@
     dest: /var/lib/AccountsService/users/kiosk
     mode: 0644
   
-- name: oasis_roles.system.rhsm
-  ansible.builtin.import_role:
-    name: oasis_roles.system.rhsm
-
-- name: install firefox
-  ansible.builtin.package:
-    name: firefox
-    state: latest
-
-- name: create systemd service for firefox
-  ansible.builtin.template:
-    src: firefox.service
-    dest: /etc/systemd/system/firefox.service
-    mode: 0644
