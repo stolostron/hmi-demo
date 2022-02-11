@@ -1,0 +1,10 @@
+[Unit]
+Description=Firefox service
+
+[Service]
+User=demo
+Group=demo
+ExecStart=/usr/bin/firefox --kiosk https://localhost:8080
+
+[Install]
+WantedBy=multi-user.target
