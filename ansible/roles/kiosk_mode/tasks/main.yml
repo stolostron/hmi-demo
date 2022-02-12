@@ -47,6 +47,6 @@
     state: enabled
 
 - name: create autostart config directory
-  file:
+  copy:
     dest: /etc/xdg/autostart/firefox.desktop
     src: files/firefox.desktop
