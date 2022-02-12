@@ -12,18 +12,6 @@
     name: "@Server With GUI"
     state: latest
 
-- name: create systemd service for firefox
-  ansible.builtin.template:
-    src: firefox.service
-    dest: /etc/systemd/system/firefox.service
-    mode: 0644
-
-- name: enable systemd service for firefox
-  ansible.builtin.systemd:
-    name: firefox.service
-    enabled: yes
-    state: restarted
-
 - name: Create gdm configuration for kiosk kiosk_mode
   ansible.builtin.template:
     src: custom.conf
@@ -38,6 +26,7 @@
     shell: /bin/bash
     uid: 2000
     group: users
+    password_lock: no
 
 - name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
   ansible.builtin.template:
@@ -56,3 +45,8 @@
     service: https
     permanent: yes
     state: enabled
+
+- name: create autostart config directory
+  file:
+    dest: /etc/xdg/autostart/firefox.desktop
+    src: files/firefox.desktop
