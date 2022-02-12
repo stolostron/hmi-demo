@@ -44,7 +44,7 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
     oc get secrets/hmi-demo-admin-password -n ansible-automation-platform -o yaml
     ```
 
-    NOTE: The password you want is the one in the stringData password field that looks like this: ```shell "stringData":{"password":"YvtpSvEXbs3ptwPawIOsnRRUl7Lw7IeN"}```
+    NOTE: The password you want is the one in the stringData password field that looks like this: ```shell "stringData":{"password":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}```
 
 7. Once logged in you will be prompted for your console.redhat.com credentials to choose which subscription to use.
 
