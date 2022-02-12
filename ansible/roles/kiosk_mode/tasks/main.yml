@@ -46,9 +46,8 @@
     dest: /etc/systemd/system/default.target
     state: link
 
-- name: allow firewall port 8088 for kiosk
-  ansible.builtin.firewall:
-    name: "kiosk"
-    port: 8088
-    proto: tcp
-    action: accept
+- name: permit traffic in default zone for https service
+  ansible.posix.firewalld:
+    service: https
+    permanent: yes
+    state: enabled
