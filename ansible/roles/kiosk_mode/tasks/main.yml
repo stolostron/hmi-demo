@@ -29,7 +29,6 @@
     name: kiosk
     comment: kiosk user
     state: present
-    create: yes
     shell: /bin/bash
     uid: 2000
     group: users
