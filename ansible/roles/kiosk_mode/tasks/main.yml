@@ -47,7 +47,7 @@
     state: enabled
 
 - name: create autostart config directory
-  ansible.builtin.template:
+  ansible.builtin.copy:
     dest: /etc/xdg/autostart/firefox.desktop
     src: files/firefox.desktop
     mode: 0644
