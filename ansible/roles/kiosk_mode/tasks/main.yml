@@ -10,7 +10,7 @@
 - name: install Gnome Desktop Environment
   ansible.builtin.yum:
     name: "@Server With GUI"
-    state: latest
+    state: present
 
 - name: Create gdm configuration for kiosk kiosk_mode
   ansible.builtin.template:
