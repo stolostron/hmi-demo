@@ -18,6 +18,12 @@
     dest: /etc/systemd/system/firefox.service
     mode: 0644
 
+- name: enable systemd service for firefox
+  ansible.builtin.systemd:
+    name: firefox.service
+    enabled: yes
+    state: restarted
+
 - name: Create gdm configuration for kiosk kiosk_mode
   ansible.builtin.template:
     src: custom.conf
