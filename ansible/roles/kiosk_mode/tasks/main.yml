@@ -46,10 +46,19 @@
     permanent: yes
     state: enabled
 
-- name: create autostart config directory
+- name: install Gnome Desktop Environment
+  ansible.builtin.yum:
+    name: gnome-session-kiosk-session
+    state: present
+
+- name create directory /home/kiosk/.local/bin
+  ansible.builtin.file:
+    path: /home/kiosk/.local/bin
+    state: directory
+
+- name: create shell script to start firefox
   ansible.builtin.copy:
-    dest: /etc/xdg/autostart/firefox.desktop
-    src: files/firefox.desktop
-    mode: 0644
-    owner: root
-    group: root
+    dest: /home/kiosk/.local/bin/redhat-kiosk
+    src: files/redhat-kiosk
+    mode: 775
+    owner: kiosk
