@@ -46,15 +46,16 @@
     permanent: yes
     state: enabled
 
-- name: install Gnome Desktop Environment
+- name: install gnome-session-kiosk-session for kiosk mode
   ansible.builtin.yum:
     name: gnome-session-kiosk-session
     state: present
 
-- name create directory /home/kiosk/.local/bin
+- name create directory local bin for kiosk mode
   ansible.builtin.file:
     path: /home/kiosk/.local/bin
     state: directory
+    mode: 0755
 
 - name: create shell script to start firefox
   ansible.builtin.copy:
