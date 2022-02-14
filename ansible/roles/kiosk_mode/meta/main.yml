@@ -29,8 +29,8 @@ galaxy_info:
   #
   platforms:
   - name: RHEL
-  #   versions:
-   - 8
+    versions:
+    - 8
   #   - 25
   # - name: SomePlatform
   #   versions:
