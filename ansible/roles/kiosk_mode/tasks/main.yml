@@ -1,0 +1,55 @@
+---
+# tasks file for kiosk_mode
+- name: Register as user with password and auto-subscribe to available content.
+  community.general.redhat_subscription:
+    state: present
+    username: "{{ rhsm_username }}"
+    password: "{{ rhsm_password }}"
+    auto_attach: true
+
+- name: install Gnome Desktop Environment
+  ansible.builtin.yum:
+    name: "@Server With GUI"
+    state: present
+
+- name: Create gdm configuration for kiosk kiosk_mode
+  ansible.builtin.template:
+    src: custom.conf
+    dest: /etc/gdm/custom.conf
+    mode: 0644
+
+- name: Add the user 'kiosk' 
+  ansible.builtin.user:
+    name: kiosk
+    comment: kiosk user
+    state: present
+    shell: /bin/bash
+    uid: 2000
+    group: users
+    password_lock: no
+
+- name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
+  ansible.builtin.template:
+    src: kiosk.conf
+    dest: /var/lib/AccountsService/users/kiosk
+    mode: 0644
+  
+- name: Change default target to graphical.target
+  file:
+    src: /usr/lib/systemd/system/graphical.target
+    dest: /etc/systemd/system/default.target
+    state: link
+
+- name: permit traffic in default zone for https service
+  ansible.posix.firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+
+- name: create autostart config directory
+  ansible.builtin.copy:
+    dest: /etc/xdg/autostart/firefox.desktop
+    src: files/firefox.desktop
+    mode: 0644
+    owner: root
+    group: root
