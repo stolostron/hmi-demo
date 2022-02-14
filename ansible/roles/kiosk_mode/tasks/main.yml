@@ -51,7 +51,7 @@
     name: gnome-session-kiosk-session
     state: present
 
-- name create directory local bin for kiosk mode
+- name: create directory local bin for kiosk mode
   ansible.builtin.file:
     path: /home/kiosk/.local/bin
     state: directory
