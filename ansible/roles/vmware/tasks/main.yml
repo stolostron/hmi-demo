@@ -12,4 +12,6 @@
     - size_gb: "{{ host_disk_size }}"
       type: "{{ host_disk_type }}"
       datastore: "{{ esxi_datastore }}"
-    customization_spec: 'ansible ssh key'
+    hardware:
+      memory_mb: "{{ memory_mb }}"
+      num_cpus: "{{ num_cpus }}"
