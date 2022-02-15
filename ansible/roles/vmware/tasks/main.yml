@@ -16,3 +16,7 @@
     hardware:
       memory_mb: "{{ memory_mb }}"
       num_cpus: "{{ num_cpus }}"
+    networks:
+    - name: "Public Network"
+      device_type: "vmxnet3"
+      connected: yes
