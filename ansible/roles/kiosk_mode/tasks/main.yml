@@ -37,7 +37,7 @@
   ansible.builtin.copy:
     src: files/kiosk.conf
     dest: /var/lib/AccountsService/users/kiosk
-    mode: 0644
+    mode: 0600
   
 - name: Change default target to graphical.target
   file:
