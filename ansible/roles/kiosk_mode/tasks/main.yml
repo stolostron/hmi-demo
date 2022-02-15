@@ -26,7 +26,6 @@
     shell: /bin/bash
     uid: 2000
     group: users
-    password_lock: no
 
 - name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
   ansible.builtin.template:
