@@ -60,7 +60,7 @@
   ansible.builtin.file:
     path: /home/kiosk/.local/bin
     state: directory
-    mode: 0755
+    mode:  755
     owner: kiosk
     group: users
 
