@@ -20,3 +20,4 @@
     - name: "Public Network"
       device_type: "vmxnet3"
       connected: yes
+      start_connected: yes
