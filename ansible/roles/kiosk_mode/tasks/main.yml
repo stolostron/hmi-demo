@@ -3,7 +3,7 @@
 - name: Ensure hostname set
   hostname:
     name: {{ inventory_hostname }}
-    
+
 - name: Register as user with password and auto-subscribe to available content.
   community.general.redhat_subscription:
     state: present
@@ -57,6 +57,12 @@
 - name: create directory local bin for kiosk mode
   ansible.builtin.file:
     path: /home/kiosk/.local/bin
+    state: directory
+    mode: 0755
+
+- name: create directory local bin for kiosk mode
+  ansible.builtin.file:
+    path: /home/kiosk/Desktop
     state: directory
     mode: 0755
 
