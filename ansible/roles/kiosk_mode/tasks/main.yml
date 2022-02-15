@@ -62,3 +62,6 @@
     src: files/redhat-kiosk
     mode: 775
     owner: kiosk
+
+- name: reboot the machine with all defaults to deploy the changes
+  reboot:
