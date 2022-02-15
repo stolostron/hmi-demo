@@ -2,7 +2,7 @@
 # tasks file for kiosk_mode
 - name: Ensure hostname set
   hostname:
-    name: "{{ inventory_hostname.split("_")[0] | lower }}"
+    name: "{{ inventory_hostname.split(".")[0] | lower }}"
 
 - name: Register as user with password and auto-subscribe to available content.
   community.general.redhat_subscription:
