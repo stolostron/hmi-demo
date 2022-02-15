@@ -66,6 +66,12 @@
     state: directory
     mode: 0755
 
+- name: create file to disable setup screens
+  ansible.builtin.file:
+    path: /home/kiosk/.config/gnome-initial-setup-done
+    state: file
+    mode: 0755
+
 - name: create shell script to start firefox
   ansible.builtin.copy:
     dest: /home/kiosk/.local/bin/redhat-kiosk
