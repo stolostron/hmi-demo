@@ -34,8 +34,8 @@
     skeleton: true
 
 - name: configure session for kiosk username /var/lib/AccountsService/users/kiosk
-  ansible.builtin.template:
-    src: kiosk.conf
+  ansible.builtin.copy:
+    src: files/kiosk.conf
     dest: /var/lib/AccountsService/users/kiosk
     mode: 0644
   
