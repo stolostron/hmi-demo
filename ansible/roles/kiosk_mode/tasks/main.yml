@@ -62,6 +62,7 @@
     state: directory
     mode: 0755
     owner: kiosk
+    group: users
 
 - name: create directory local bin for kiosk mode
   ansible.builtin.file:
@@ -69,6 +70,7 @@
     state: directory
     mode: 0755
     owner: kiosk
+    group: users
 
 - name: create config directory to disable welcome screen
   ansible.builtin.file:
@@ -76,6 +78,7 @@
     state: directory
     mode: 0755
     owner: kiosk
+    group: users
 
 - name: create file to disable setup screens
   ansible.builtin.file:
@@ -83,6 +86,7 @@
     state: touch
     mode: 0755
     owner: kiosk
+    group: users
 
 - name: create shell script to start firefox
   ansible.builtin.copy:
@@ -90,6 +94,7 @@
     src: files/redhat-kiosk
     mode: 775
     owner: kiosk
+    group: users
 
 - name: create desktop icon for Ignition Kiosk
   ansible.builtin.copy:
@@ -97,6 +102,7 @@
     src: files/kiosk.desktop
     mode: 775
     owner: kiosk
+    group: users
 
 - name: reboot the machine with all defaults to deploy the changes
   reboot:
