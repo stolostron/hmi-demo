@@ -51,11 +51,6 @@
     permanent: yes
     state: enabled
 
-- name: install yum install gnome-shell-extension-desktop-icons so we can put icon on desktop
-  ansible.builtin.yum:
-    name: gnome-shell-extension-desktop-icons
-    state: present
-
 - name: install yum install gnome-session-kiosk-session
   ansible.builtin.yum:
     name: gnome-session-kiosk-session
@@ -99,14 +94,6 @@
     src: files/redhat-kiosk
     mode: '0755'
     owner: kiosk
-    group: users
-
-- name: create desktop icon for Ignition Kiosk
-  ansible.builtin.copy:
-    dest: /home/kiosk/Desktop/kiosk.desktop
-    src: files/kiosk.desktop
-    mode: '0755'
-    owner: kiosks
     group: users
 
 - name: reboot the machine with all defaults to deploy the changes
