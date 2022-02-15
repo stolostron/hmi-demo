@@ -101,7 +101,7 @@
     dest: /home/kiosk/Desktop/kiosk.desktop
     src: files/kiosk.desktop
     mode: '0755'
-    owner: kiosk
+    owner: kiosks
     group: users
 
 - name: reboot the machine with all defaults to deploy the changes
