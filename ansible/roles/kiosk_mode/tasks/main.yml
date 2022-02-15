@@ -1,5 +1,9 @@
 ---
 # tasks file for kiosk_mode
+- name: Ensure hostname set
+  hostname:
+    name: {{ inventory_hostname }}
+    
 - name: Register as user with password and auto-subscribe to available content.
   community.general.redhat_subscription:
     state: present
