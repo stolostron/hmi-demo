@@ -1,4 +1,4 @@
-# hmi-demo
+# Human Machine Interface for Edge Demo
 
 ## Description
 
@@ -38,7 +38,7 @@ This is a work in progress at this time. Currently the build of the Ansible Auto
     "password": "Z29BUzZSUFhtd0RneHZ6TnFYZVRocnlXVHY1VnJueDc="
     ```
 
-4. Log in to controller in a web browser via the address in oc get route in the HOST/PORT section
+4. Log in to controller in a web browser via the address in oc get route command below.
 
     ```shell
     oc get route -n ansible-automation-platform
@@ -50,4 +50,15 @@ This is a work in progress at this time. Currently the build of the Ansible Auto
 
 ## Configuring Ansible Automation Platform
 
-In this repo
+### Automated Method (WIP)
+
+Configure everything via via <https://github.com/redhat-cop/tower_configuration>
+
+A good example is at <https://github.com/ansible/workshops/tree/devel/roles/populate_controller>
+
+### Manual method until we get the above configured
+
+1. Create git credentials
+2. Create virtualization credentials
+3. Create inventory from virtualization provider
+4. Create templates for each playbook
