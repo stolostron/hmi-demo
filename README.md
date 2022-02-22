@@ -1,8 +1,14 @@
-# hmi-demo
+# Human Machine Interface for Edge Demo
 
-Description: This is a demo of a customer deployment of Inductive Automation Ignition application to RHEL Edge device including some of the external services required by the customer for security, logging and certification so the application can run in HTTPS mode in a completely disconnected environment.
+## Description
 
-![architecture_image](images/arch.gif)
+This is a demo of a customer deployment of Inductive Automation Ignition application to RHEL Edge device including some of the external services required by the customer for security, logging and certification so the application can run in HTTPS mode in a completely disconnected environment.
+
+## Status
+
+This is a work in progress at this time. Currently the build of the Ansible Automation Platform, the VM and deployment of the application as a podman systemd service is fully functional. The IDM server deployment, creating certificate requests and assigning dns is still a work in progress as this was something that had a extremely short deadline to demo.
+
+![architecture_image](images/hmi-demo.png)
 
 ## Steps to install
 
@@ -12,25 +18,27 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
     oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/stable
     ```
 
-2. Create service account so we can install Ansible Automation Platform via Openshift Gitops.
+2. Install Ansible Automation Platform via OpenShift Gitops. This will do the following: create a service account, deploy the AAP operator, patch the operator, controller and add configurations for the URL using the patch operator to fully install Ansible Automation Platform.
 
     ```shell
-    oc create -f argo/argocd-clusterbindingrole.yaml
+    for f in  gitops/argocd/apps/aap-operator.yaml gitops/argocd/apps/aap-controller.yaml gitops/operators/patch-operator/subscription.yaml gitops/operators/patch-operator/rbac.yaml gitops/operators/patch-operator/operatorgroup.yaml gitops/argocd/apps/patch-operator.yaml gitops/aap/consolelink-patch.yaml gitops/aap/consolelink.yaml;do oc create -f $f;done
     ```
 
-3. Create Openshift Gitops application to install Ansible Automation Platform Operator.
+3. Retrieve web address and credentials to log into the Ansible Automation Platform console, and login.
 
     ```shell
-    oc create -f argo/operator.yaml
+    oc get routes -n ansible-automation-platform | awk {'print $2'} && oc get secrets/controller-admin-password -n ansible-automation-platform -o json | jq '.data' |grep -v '{' |grep -v '}'
     ```
 
-4. Create OpenShift Gitops application to install an instance of Ansible Automation Platform Controller.
+    Example Output:
 
     ```shell
-    oc create -f argo/controller.yaml
+    HOST/PORT
+    controller-ansible-automation-platform.apps.clustername
+    "password": "Z29BUzZSUFhtd0RneHZ6TnFYZVRocnlXVHY1VnJueDc="
     ```
 
-5. Log in to controller in a web browser via the address in oc get route in the HOST/PORT section
+4. Log in to controller in a web browser via the address in oc get route command below.
 
     ```shell
     oc get route -n ansible-automation-platform
@@ -38,14 +46,19 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
     hmi-demo   hmi-demo-ansible-automation-platform.apps.brooklyn.demo.red-chesterfield.com          hmi-demo-service   http   edge/Redirect   None
     ```
 
-6. Login with credential username Admin and the password from below command:
-
-    ```shell
-    oc get secrets/hmi-demo-admin-password -n ansible-automation-platform -o yaml
-    ```
-
-    NOTE: The password you want is the one in the stringData password field that looks like this: ```shell "stringData":{"password":"YvtpSvEXbs3ptwPawIOsnRRUl7Lw7IeN"}```
-
-7. Once logged in you will be prompted for your console.redhat.com credentials to choose which subscription to use.
+5. Once logged in you will be prompted for your cloud.redhat.com credentials to choose which subscription to use.
 
 ## Configuring Ansible Automation Platform
+
+### Automated Method (WIP)
+
+Configure everything via via <https://github.com/redhat-cop/tower_configuration>
+
+A good example is at <https://github.com/ansible/workshops/tree/devel/roles/populate_controller>
+
+### Manual method until we get the above configured
+
+1. Create git credentials
+2. Create virtualization credentials
+3. Create inventory from virtualization provider
+4. Create templates for each playbook
