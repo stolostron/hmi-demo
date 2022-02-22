@@ -1,6 +1,12 @@
 # hmi-demo
 
-Description: This is a demo of a customer deployment of Inductive Automation Ignition application to RHEL Edge device including some of the external services required by the customer for security, logging and certification so the application can run in HTTPS mode in a completely disconnected environment.
+## Description
+
+This is a demo of a customer deployment of Inductive Automation Ignition application to RHEL Edge device including some of the external services required by the customer for security, logging and certification so the application can run in HTTPS mode in a completely disconnected environment.
+
+## Status
+
+This is a work in progress at this time. Currently the build of the Ansible Automation Platform, the VM and deployment of the application as a podman systemd service is fully functional. The IDM server deployment, creating certificate requests and assigning dns is still a work in progress as this was something that had a extremely short deadline to demo.
 
 ![architecture_image](images/hmi-demo.png)
 
@@ -12,7 +18,7 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
     oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/stable
     ```
 
-2. Create service account, deploy the AAP operator, patch operator, controller and configurations for the URL using the patch operator to fully install Ansible Automation Platform via Openshift Gitops.
+2. Install Ansible Automation Platform via OpenShift Gitops. This will do the following: create a service account, deploy the AAP operator, patch the operator, controller and add configurations for the URL using the patch operator to fully install Ansible Automation Platform.
 
     ```shell
     oc create -f gitops/argocd/apps/aap-operator.yaml || oc create -f gitops/argocd/apps/aap-controller.yaml || oc create -f gitops/operators/patch-operator/subscription.yaml || oc create -f gitops/operators/patch-operator/rbac.yaml || oc create -f gitops/operators/patch-operator/operatorgroup.yaml || oc create -f gitops/argocd/apps/patch-operator.yaml || oc create -f gitops/aap/consolelink-patch.yaml || oc create -f gitops/aap/consolelink.yaml
@@ -32,10 +38,7 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
     "password": "Z29BUzZSUFhtd0RneHZ6TnFYZVRocnlXVHY1VnJueDc="
     ```
 
-4. Create OpenShift Gitops application to install an instance of Ansible Automation Platform Controller.
-
-
-5. Log in to controller in a web browser via the address in oc get route in the HOST/PORT section
+4. Log in to controller in a web browser via the address in oc get route in the HOST/PORT section
 
     ```shell
     oc get route -n ansible-automation-platform
@@ -43,8 +46,8 @@ Description: This is a demo of a customer deployment of Inductive Automation Ign
     hmi-demo   hmi-demo-ansible-automation-platform.apps.brooklyn.demo.red-chesterfield.com          hmi-demo-service   http   edge/Redirect   None
     ```
 
-6. Once logged in you will be prompted for your console.redhat.com credentials to choose which subscription to use.
+5. Once logged in you will be prompted for your cloud.redhat.com credentials to choose which subscription to use.
 
 ## Configuring Ansible Automation Platform
 
-In this repo we
+In this repo
