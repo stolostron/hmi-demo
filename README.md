@@ -21,7 +21,7 @@ This is a work in progress at this time. Currently the build of the Ansible Auto
 2. Install Ansible Automation Platform via OpenShift Gitops. This will do the following: create a service account, deploy the AAP operator, patch the operator, controller and add configurations for the URL using the patch operator to fully install Ansible Automation Platform.
 
     ```shell
-    oc create -f gitops/argocd/apps/aap-operator.yaml || oc create -f gitops/argocd/apps/aap-controller.yaml || oc create -f gitops/operators/patch-operator/subscription.yaml || oc create -f gitops/operators/patch-operator/rbac.yaml || oc create -f gitops/operators/patch-operator/operatorgroup.yaml || oc create -f gitops/argocd/apps/patch-operator.yaml || oc create -f gitops/aap/consolelink-patch.yaml || oc create -f gitops/aap/consolelink.yaml
+    for f in  gitops/argocd/apps/aap-operator.yaml gitops/argocd/apps/aap-controller.yaml gitops/operators/patch-operator/subscription.yaml gitops/operators/patch-operator/rbac.yaml gitops/operators/patch-operator/operatorgroup.yaml gitops/argocd/apps/patch-operator.yaml gitops/aap/consolelink-patch.yaml gitops/aap/consolelink.yaml;do oc create -f $f;done
     ```
 
 3. Retrieve web address and credentials to log into the Ansible Automation Platform console, and login.
