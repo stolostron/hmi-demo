@@ -27,7 +27,7 @@ This is a work in progress at this time. Currently the build of the Ansible Auto
 3. Retrieve web address and credentials to log into the Ansible Automation Platform console, and login.
 
     ```shell
-    oc get routes -n ansible-automation-platform | awk {'print $2'} && oc get secrets/controller-admin-password -n ansible-automation-platform -o json | jq '.data' |grep -v '{' |grep -v '}'
+    oc get routes -n ansible-automation-platform | awk {'print $2'} && oc get secrets/example-admin-password -n ansible-automation-platform -o json | jq '.data' |grep -v '{' |grep -v '}' |cut -d '"' -f4 | base64 -d && echo ''
     ```
 
     Example Output:
