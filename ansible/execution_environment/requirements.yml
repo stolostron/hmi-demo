@@ -13,3 +13,6 @@ collections:
     source: https://galaxy.ansible.com
   - name: containers.podman
     source: https://galaxy.ansible.com
+roles:
+  - name: ansible-hardening
+    source: git+https://github.com/openstack/ansible-hardening
