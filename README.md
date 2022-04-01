@@ -18,16 +18,22 @@ This is a work in progress at this time. Currently the build of the Ansible Auto
     oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/stable
     ```
 
-2. Install Ansible Automation Platform via OpenShift Gitops. This will do the following: create a service account, deploy the AAP operator, patch the operator, controller and add configurations for the URL using the patch operator to fully install Ansible Automation Platform.
+2. Create Cluster Role Binding for gitops.
+
+   ```shell
+   oc create -f argo/argocd-clusterbindingrole.yaml
+   ```
+
+3. Install Ansible Automation Platform via OpenShift Gitops. This will do the following: create a service account, deploy the AAP operator, patch the operator, controller and add configurations for the URL using the patch operator to fully install Ansible Automation Platform.
 
     ```shell
     for f in  gitops/argocd/apps/aap-operator.yaml gitops/argocd/apps/aap-controller.yaml gitops/operators/patch-operator/subscription.yaml gitops/operators/patch-operator/rbac.yaml gitops/operators/patch-operator/operatorgroup.yaml gitops/argocd/apps/patch-operator.yaml gitops/aap/consolelink-patch.yaml gitops/aap/consolelink.yaml;do oc create -f $f;done
     ```
 
-3. Retrieve web address and credentials to log into the Ansible Automation Platform console, and login.
+4. Retrieve web address and credentials to log into the Ansible Automation Platform console, and login.
 
     ```shell
-    oc get routes -n ansible-automation-platform | awk {'print $2'} && oc get secrets/controller-admin-password -n ansible-automation-platform -o json | jq '.data' |grep -v '{' |grep -v '}'
+    oc get routes -n ansible-automation-platform | awk {'print $2'} && echo Password: && oc get secrets/example-admin-password -n ansible-automation-platform -o json | jq '.data' |grep -v '{' |grep -v '}' |cut -d '"' -f4 | base64 -d && echo ''
     ```
 
     Example Output:
@@ -35,7 +41,8 @@ This is a work in progress at this time. Currently the build of the Ansible Auto
     ```shell
     HOST/PORT
     controller-ansible-automation-platform.apps.clustername
-    "password": "Z29BUzZSUFhtd0RneHZ6TnFYZVRocnlXVHY1VnJueDc="
+    Password:
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ```
 
 4. Log in to controller in a web browser via the address in oc get route command below.
